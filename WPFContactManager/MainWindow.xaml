@@ -25,11 +25,18 @@
         </Grid.RowDefinitions>
 
         <DataGrid Name="DataTable" Height="405" Width="715" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="5" 
-                  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,12,0,0" IsReadOnly="True" 
+                  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,12,0,0"
                   MouseDoubleClick="DataTable_DoubleClick" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Phone Number" Binding="{Binding Phone_Number}" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding Phone_Number}" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Birth Date" Binding="{Binding Birth_Date}" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Language" Binding="{Binding Language}" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridCheckBoxColumn Header="Del" x:Name="DeleteCheckboxes" IsReadOnly="False" Visibility="Hidden"/>
             </DataGrid.Columns>
         </DataGrid>
 

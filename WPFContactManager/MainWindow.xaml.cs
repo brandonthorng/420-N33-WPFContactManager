@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace WPFContactManager {
@@ -9,65 +11,149 @@ namespace WPFContactManager {
         // Get Singleton Database Manager Instance
         DatabaseManager dbm = DatabaseManager.Instance;
 
+        // Current view bool (Either Default or Summary view)
+        bool summaryView = false;
+
         // Main method
         public MainWindow() {
             InitializeComponent();
             LoadDefaultView();
         }
 
-        // Hides all table headers, call this when modifying views
-        private void HideAllHeaders() {
-            foreach(var column in DataTable.Columns) {
-                column.Visibility = Visibility.Hidden;
-            }
+        private void LoadDefaultView() {
+            // Gets back all the rows from the database and sets it as the DataTable's item source
+            DataTable.ItemsSource = dbm.UpdateTable();
+
+            SetColumnVisibility(1, 2);
         }
 
-        private void LoadDefaultView() {
-            // EXAMPLE
-            // The table takes in a item source in the form of a list
-            List<Contact> contacts = new List<Contact> {
-                new Contact(1, "Joe"),
-                new Contact(2, "Donald"),
-                new Contact(3, "Putin"),
-                new Contact(4, "Freddy"),
-                new Contact(5, "God"),
-                new Contact(6, "Banana"),
-                new Contact(7, "Me")
-            };
-
-            // Set the ItemsSource as the List and display
-            DataTable.ItemsSource = contacts;
-
+        private void SetColumnVisibility(params int[] cols) {
             // Hides all headers
-            HideAllHeaders();
+            foreach(var col in DataTable.Columns) {
+                col.Visibility = Visibility.Hidden;
+            }
 
-            // Only shows the Id and Name headers
-            DataTable.Columns[0].Visibility = Visibility.Visible;
-            DataTable.Columns[1].Visibility = Visibility.Visible;
+            // Sets parameter columns to visible
+            foreach(int col in cols) {
+                // Sets the column to visibile
+                DataTable.Columns[col-1].Visibility = Visibility.Visible;
+            }
         }
 
         // If a button from the Controls category was clicked, handle it here.
         private void ControlsButton_Clicked(object sender, RoutedEventArgs e) {
             if(sender.Equals(ADD_CONTACT)) {
-                //TODO
-                //Window popup with relevant details
+                if(ADD_CONTACT.Content.ToString() == "Add Contact") {
+                    //TODO POPUP WINDOW
+                } else {
+                    // If user clicks confirm button
+
+                    List<Contact> toDelete = new List<Contact>();
+
+                    for(int i = 0; i < DataTable.Items.Count; i++) {
+                        var item = DataTable.Items[i];
+                        var checkbox = DataTable.Columns[8].GetCellContent(item) as System.Windows.Controls.CheckBox;
+                        if((bool)checkbox.IsChecked) {
+                            toDelete.Add(DataTable.Items[i] as Contact);
+                        }
+                    }
+
+                    // If no items were selected, do nothing
+                    if(toDelete.Count == 0) {
+                        return;
+                    }
+
+                    // Sets checkbox column as hidden
+                    DeleteCheckboxes.Visibility = Visibility.Hidden;
+                    // Reset button text to default
+                    DELETE_CONTACT.Content = "Delete Contact";
+                    ADD_CONTACT.Content = "Add Contact";
+
+                    dbm.DeleteContact(toDelete);
+
+                    DataTable.ItemsSource = dbm.UpdateTable();
+
+                    if(summaryView) {
+                        SetColumnVisibility(1, 2, 3, 4, 5, 6, 7, 8);
+                    } else {
+                        LoadDefaultView();
+                    }
+                }
             }
             if(sender.Equals(DELETE_CONTACT)) {
-                //TODO
-                //Checklist to delete contacts
+                if(DELETE_CONTACT.Content.ToString() == "Delete Contact") {
+                    // Sets checkbox column as visible
+                    DeleteCheckboxes.Visibility = Visibility.Visible;
+
+                    // Reset button text to default
+                    DELETE_CONTACT.Content = "Cancel";
+                    ADD_CONTACT.Content = "Confirm";
+                } else {
+                    // If user clicks cancel button
+
+                    // Sets checkbox column as hidden
+                    DeleteCheckboxes.Visibility = Visibility.Hidden;
+
+                    // Reset button text to default
+                    DELETE_CONTACT.Content = "Delete Contact";
+                    ADD_CONTACT.Content = "Add Contact";
+                }
             }
         }
 
         // If a button from the Other category was clicked, handle it here.
         private void OtherButton_Clicked(object sender, RoutedEventArgs e) {
             if(sender.Equals(SUMMARIZE_CONTACT)) {
-                //TODO
-                //Display a summarized view on the DataTable
+                if(SUMMARIZE_CONTACT.Content.ToString() == "Summarize Contacts") {
+                    if(ADD_CONTACT.Content.ToString() == "Confirm") {
+                        // If user clicks summary view while deleting
+                        SetColumnVisibility(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+                        // Sets summary view to true
+                        summaryView = true;
+
+                        // Change button name
+                        SUMMARIZE_CONTACT.Content = "Return to default view";
+                    } else {
+                        // Sets summary view to true
+                        summaryView = true;
+
+                        // Show all columns
+                        SetColumnVisibility(1, 2, 3, 4, 5, 6, 7, 8);
+
+                        // Change button name
+                        SUMMARIZE_CONTACT.Content = "Return to default view";
+                    }
+                } else {
+                    if(ADD_CONTACT.Content.ToString() == "Confirm") {
+                        // If user clicks return to default view while deleting
+                        SetColumnVisibility(1, 2, 9);
+
+                        // Sets summary view to false
+                        summaryView = false;
+
+                        // Change button text
+                        SUMMARIZE_CONTACT.Content = "Summarize Contacts";
+                    } else {
+                        // If user clicks return to default view
+
+                        // Sets summary view to true
+                        summaryView = false;
+
+                        // Show all columns
+                        SetColumnVisibility(1, 2);
+
+                        // Change button text
+                        SUMMARIZE_CONTACT.Content = "Summarize Contacts";
+                    }
+                }
             }
             if(sender.Equals(IMPORT_CONTACTS)) {
+                //TODO
                 //Popup window to accept a .csv file
             }
             if(sender.Equals(EXPORT_CONTACTS)) {
+                //TODO
                 //Popup window to save a .csv file
             }
         }
@@ -76,9 +162,10 @@ namespace WPFContactManager {
         private void DataTable_DoubleClick(object sender, MouseButtonEventArgs e) {
             if(DataTable.SelectedItem == null) return;
 
-            // Returns the Contact object
+            // Returns the Contact object that was double clicked
             var selectedContact = DataTable.SelectedItem as Contact;
-            //TODO popup window
+
+            //TODO popup window here
         }
     }
 }

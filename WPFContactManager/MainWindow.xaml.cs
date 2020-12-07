@@ -104,6 +104,7 @@ namespace WPFContactManager {
         // If a button from the Other category was clicked, handle it here.
         private void OtherButton_Clicked(object sender, RoutedEventArgs e) {
             if(sender.Equals(SUMMARIZE_CONTACT)) {
+                DataTable.ItemsSource = dbm.UpdateTable(); 
                 if(SUMMARIZE_CONTACT.Content.ToString() == "Summarize Contacts") {
                     if(ADD_CONTACT.Content.ToString() == "Confirm") {
                         // If user clicks summary view while deleting
@@ -166,6 +167,16 @@ namespace WPFContactManager {
             var selectedContact = DataTable.SelectedItem as Contact;
 
             //TODO popup window here
+            EditContactPopup editContactPopup = new EditContactPopup();
+            editContactPopup.Show();
+            editContactPopup.ID.Text = selectedContact.Id.ToString();
+            editContactPopup.Name.Text = selectedContact.Name.ToString();
+            editContactPopup.Email.Text = selectedContact.Email.ToString();
+            editContactPopup.PhoneNumber.Text = selectedContact.Phone_Number.ToString();
+            editContactPopup.Country.Text = selectedContact.Country.ToString();
+            editContactPopup.Gender.Text = selectedContact.Gender.ToString();
+            editContactPopup.BirthDate.Text = selectedContact.Birth_Date.ToString();
+            editContactPopup.Language.Text = selectedContact.Language.ToString();
         }
     }
 }

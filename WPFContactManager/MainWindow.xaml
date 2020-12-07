@@ -32,7 +32,7 @@
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}" IsReadOnly="True" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Phone Number" Binding="{Binding Phone_Number}" IsReadOnly="True" Visibility="Hidden"/>
-                <DataGridTextColumn Header="Country" Binding="{Binding Phone_Number}" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding Country}" IsReadOnly="True" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" IsReadOnly="True" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Birth Date" Binding="{Binding Birth_Date}" IsReadOnly="True" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Language" Binding="{Binding Language}" IsReadOnly="True" Visibility="Hidden"/>

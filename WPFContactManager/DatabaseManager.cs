@@ -63,8 +63,25 @@ namespace WPFContactManager {
         }
 
         // Method to edit existing contact
-        public void EditContact() {
+        public void EditContact(Contact contact) {
+            using (var connection = new SqlConnection(CONNECTION_STRING))
+            {
+                connection.Open();
+                var query = "UPDATE Contact SET Name=@Name, Email=@Email, Phone_Number=@Phone_Number, Country=@Country, Gender=@Gender, Birth_Date=@Birth_Date, Language=@Language WHERE Id=@Id";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", contact.Id);
+                    command.Parameters.AddWithValue("@Name", contact.Name);
+                    command.Parameters.AddWithValue("@Email", contact.Email);
+                    command.Parameters.AddWithValue("@Phone_Number", contact.Phone_Number);
+                    command.Parameters.AddWithValue("@Country", contact.Country);
+                    command.Parameters.AddWithValue("@Gender", contact.Gender);
+                    command.Parameters.AddWithValue("@Birth_Date", contact.Birth_Date);
+                    command.Parameters.AddWithValue("@Language", contact.Language);
 
+                    command.ExecuteNonQuery();
+                }
+            }
         }
 
         // Method to delete one or more contacts

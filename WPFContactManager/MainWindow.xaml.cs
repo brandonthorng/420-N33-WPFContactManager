@@ -45,6 +45,8 @@ namespace WPFContactManager {
             if(sender.Equals(ADD_CONTACT)) {
                 if(ADD_CONTACT.Content.ToString() == "Add Contact") {
                     //TODO POPUP WINDOW
+                    AddContactPopup addContactPopup = new AddContactPopup();
+                    addContactPopup.Show();
                 } else {
                     // If user clicks confirm button
 
@@ -169,7 +171,7 @@ namespace WPFContactManager {
             //TODO popup window here
             EditContactPopup editContactPopup = new EditContactPopup();
             editContactPopup.Show();
-            editContactPopup.ID.Text = selectedContact.Id.ToString();
+            editContactPopup.ID.Content = selectedContact.Id.ToString();
             editContactPopup.Name.Text = selectedContact.Name.ToString();
             editContactPopup.Email.Text = selectedContact.Email.ToString();
             editContactPopup.PhoneNumber.Text = selectedContact.Phone_Number.ToString();

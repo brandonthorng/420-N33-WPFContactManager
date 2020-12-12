@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFContactManager"
         mc:Ignorable="d"
-        Title="Add Contact" Height="450" Width="500">
+        Title="Add Contact" Height="450" Width="550">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -25,23 +25,23 @@
         </Grid.RowDefinitions>
 
         <Label Name="TextBox0" Height="auto" Width="auto" Grid.Row="0" Grid.ColumnSpan="2" Content="Add a Contact " VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" />
-        <Label Name="TextBox1" Height="auto" Width="122" Grid.Row="1" Content="ID: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,5.6,19.6,9.8"/>
-        <Label Name="TextBox2" Height="auto" Width="122" Grid.Row="2" Content="Name: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,5.6,19.6,9.8"/>
-        <Label Name="TextBox3" Height="auto" Width="122" Grid.Row="3" Content="Email: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,5.6,19.6,9.8"/>
-        <Label Name="TextBox4" Height="auto" Width="122" Grid.Row="4" Content="Phone Number: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,5.6,19.6,9.8"/>
-        <Label Name="TextBox5" Height="29" Width="122" Grid.Row="5" Content="Country: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,5.6,19.6,9.8"/>
-        <Label Name="TextBox6" Height="auto" Width="122" Grid.Row="6" Content="Gender: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,5.6,19.6,9.8"/>
-        <Label Name="TextBox7" Height="29" Width="122" Grid.Row="7" Content="Birth Date: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,5.6,19.6,9.8"/>
-        <Label Name="TextBox8" Height="29" Width="122" Grid.Row="8" Content="Language: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,5.6,19.6,9.8"/>
+        <Label Name="TextBox1" Height="auto" Width="122" Grid.Row="1" Content="ID: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,5.6,95.2,9.8"/>
+        <Label Name="TextBox2" Height="auto" Width="122" Grid.Row="2" Content="Name: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,5.2,95.2,10.2"/>
+        <Label Name="TextBox3" Height="auto" Width="122" Grid.Row="3" Content="Email: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,4.8,95.2,9.6"/>
+        <Label Name="TextBox4" Height="35" Width="122" Grid.Row="4" Content="Phone Number: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,5.4,95,2"/>
+        <Label Name="TextBox5" Height="29" Width="122" Grid.Row="5" Content="Country: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,3,95.2,9.6"/>
+        <Label Name="TextBox6" Height="auto" Width="122" Grid.Row="6" Content="Gender: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,4.4,95.2,10.2"/>
+        <Label Name="TextBox7" Height="29" Width="122" Grid.Row="7" Content="Birth Date: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,2.8,95.2,9.8"/>
+        <Label Name="TextBox8" Height="29" Width="122" Grid.Row="8" Content="Language: " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15" Margin="0,2.2,95.2,10.4"/>
 
-        <TextBox Name="ID" Height="auto" Width="auto" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="10,10"/>
-        <TextBox Name="Name" Height="auto" Width="auto" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="10,10"/>
-        <TextBox Name="Email" Height="auto" Width="auto" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="10,10"/>
-        <TextBox Name="PhoneNumber" Height="auto" Width="auto" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="10,10"/>
-        <TextBox Name="Country" Height="auto" Width="auto" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="10,10"/>
-        <TextBox Name="Gender" Height="auto" Width="auto" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="10,10"/>
-        <TextBox Name="BirthDate" Height="auto" Width="auto" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Margin="10,10"/>
-        <TextBox Name="Language" Height="auto" Width="auto" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Margin="10,10"/>
+        <TextBox Name="ID" Height="auto" Width="300" Grid.Row="1" VerticalAlignment="Center"  Grid.ColumnSpan="2" Margin="157,9.6,36.6,14.8" />
+        <TextBox Name="Name" Height="auto" Width="300" Grid.Row="2" VerticalAlignment="Center" Margin="157,10.2,36.6,15.2" Grid.ColumnSpan="2"/>
+        <TextBox Name="Email" Height="auto" Width="300" Grid.Row="3" VerticalAlignment="Center" Margin="157,9.8,36.6,14.6" Grid.ColumnSpan="2"/>
+        <TextBox Name="PhoneNumber" Height="auto" Width="300" Grid.Row="4" VerticalAlignment="Center" Margin="157,10.4,36.6,15" Grid.ColumnSpan="2"/>
+        <TextBox Name="Country" Height="auto" Width="300" Grid.Row="5" VerticalAlignment="Center" Margin="157,10,36.6,13.6" Grid.ColumnSpan="2"/>
+        <TextBox Name="Gender" Height="auto" Width="300" Grid.Row="6" VerticalAlignment="Center" Margin="157,10.4,36.6,13.2" Grid.ColumnSpan="2"/>
+        <TextBox Name="BirthDate" Height="auto" Width="300" Grid.Row="7" VerticalAlignment="Center" Margin="157,9.8,36.6,13.8" Grid.ColumnSpan="2"/>
+        <TextBox Name="Language" Height="auto" Width="300" Grid.Row="8" VerticalAlignment="Center" Margin="157,10.2,36.6,13.4" Grid.ColumnSpan="2"/>
 
         <Button Name="cancel"  BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="9"  Margin="30,5" Click="cancel_Click" IsCancel="True">Cancel</Button>
         <Button Name="confirm"  BorderBrush="Black" BorderThickness="1" Grid.Column="0" Grid.Row="9"  Margin="30,5" Click="confirm_Click">Confirm</Button>

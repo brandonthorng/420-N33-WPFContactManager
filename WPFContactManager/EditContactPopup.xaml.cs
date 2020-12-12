@@ -31,7 +31,7 @@ namespace WPFContactManager {
 
         private void confirm_Click(object sender, RoutedEventArgs e)
         {
-            Contact contact = new Contact(ID.Content, Name.Text, Email.Text, PhoneNumber.Text, Country.Text, Gender.Text, BirthDate.Text, Language.Text);
+            Contact contact = new Contact(ID.Text, Name.Text, Email.Text, PhoneNumber.Text, Country.Text, Gender.Text, BirthDate.Text, Language.Text);
 
             contact.Name = Name.Text.ToString();
             contact.Email = Email.Text.ToString();

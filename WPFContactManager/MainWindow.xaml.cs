@@ -171,7 +171,7 @@ namespace WPFContactManager {
             //TODO popup window here
             EditContactPopup editContactPopup = new EditContactPopup();
             editContactPopup.Show();
-            editContactPopup.ID.Content = selectedContact.Id.ToString();
+            editContactPopup.ID.Text = selectedContact.Id.ToString();
             editContactPopup.Name.Text = selectedContact.Name.ToString();
             editContactPopup.Email.Text = selectedContact.Email.ToString();
             editContactPopup.PhoneNumber.Text = selectedContact.Phone_Number.ToString();

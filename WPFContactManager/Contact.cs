@@ -19,7 +19,19 @@ namespace WPFContactManager {
         public string Birth_Date { get; set; }
         public string Language { get; set; }
 
-        // Constructor for Contact object
+        // Contstructor for Contact that takes in all proper values
+        public Contact(int Id, string Name, string Email, string Phone_Number, string Country, string Gender, string Birth_Date, string Language) {
+            this.Id = Id;
+            this.Name = Name;
+            this.Email = Email;
+            this.Phone_Number = Phone_Number;
+            this.Country = Country;
+            this.Gender = Gender;
+            this.Birth_Date = Birth_Date;
+            this.Language = Language;
+        }
+
+        // Constructor for Contact object that takes in objects
         public Contact(object Id, object Name, object Email, object Phone_Number, object Country, object Gender, object Birth_Date, object Language) {
             this.Id = int.Parse(Id.ToString());
             this.Name = Name.ToString();

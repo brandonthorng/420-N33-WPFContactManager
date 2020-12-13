@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFContactManager"
         mc:Ignorable="d"
-        Title="Contact Manager - Brandon, Lovepreet, Donglin" Height="470" Width="900">
+        Title="Contact Manager - Brandon, Lovepreet" Height="470" Width="900">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -52,7 +53,7 @@
                     <Button Name="DELETE_CONTACT" Click="ControlsButton_Clicked">Delete Contact</Button>
                 </StackPanel>
             </GroupBox>
-        
+
             <GroupBox Header="Other">
                 <StackPanel>
                     <StackPanel.Resources>
@@ -65,7 +66,7 @@
                     <Button Name="EXPORT_CONTACTS" Click="OtherButton_Clicked">Export Contacts</Button>
                 </StackPanel>
             </GroupBox>
-      </StackPanel>
-        
+
+        </StackPanel>
     </Grid>
 </Window>

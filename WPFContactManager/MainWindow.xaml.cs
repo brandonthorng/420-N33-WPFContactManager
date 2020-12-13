@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -152,12 +153,44 @@ namespace WPFContactManager {
                 }
             }
             if(sender.Equals(IMPORT_CONTACTS)) {
-                //TODO
-                //Popup window to accept a .csv file
+                var ofd = new OpenFileDialog();
+                ofd.Filter = "CSV File (.csv)|*.csv";
+
+                if(ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                    string[] fileContent = File.ReadAllLines(ofd.FileName);
+
+                    foreach(string fileLine in fileContent) {
+                        var line = fileLine.Split(',');
+
+                        Contact newContact = new Contact(int.Parse(line[0]), line[1], line[2], line[3], line[4], line[5], line[6], line[7]);
+
+                        dbm.AddContact(newContact);
+                    }
+
+                    DataTable.ItemsSource = dbm.UpdateTable();
+                }
             }
             if(sender.Equals(EXPORT_CONTACTS)) {
-                //TODO
-                //Popup window to save a .csv file
+                var sfd = new SaveFileDialog {
+                    FileName = "Contacts",
+                    DefaultExt = ".text",
+                    Filter = "CSV File (.csv)|*.csv"
+                };
+
+                if(sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                    List<Contact> contacts = dbm.UpdateTable();
+
+                    string fileContents = "";
+
+                    foreach(Contact c in contacts) {
+                        string formattedString = string.Format("{0},{1},{2},{3},{4},{5},{6},{7}\n",
+                            c.Id, c.Name, c.Email, c.Phone_Number, c.Country, c.Gender, c.Birth_Date, c.Language);
+                        
+                        fileContents += formattedString;
+                    }
+
+                    File.WriteAllText(sfd.FileName, fileContents);
+                }
             }
         }
 
@@ -165,20 +198,25 @@ namespace WPFContactManager {
         private void DataTable_DoubleClick(object sender, MouseButtonEventArgs e) {
             if(DataTable.SelectedItem == null) return;
 
-            // Returns the Contact object that was double clicked
-            var selectedContact = DataTable.SelectedItem as Contact;
+            if(DELETE_CONTACT.Content.ToString() == "Delete Contact") {
+                // Returns the Contact object that was double clicked if table is not in delete mode
+                var selectedContact = DataTable.SelectedItem as Contact;
 
-            //TODO popup window here
-            EditContactPopup editContactPopup = new EditContactPopup();
-            editContactPopup.Show();
-            editContactPopup.ID.Text = selectedContact.Id.ToString();
-            editContactPopup.Name.Text = selectedContact.Name.ToString();
-            editContactPopup.Email.Text = selectedContact.Email.ToString();
-            editContactPopup.PhoneNumber.Text = selectedContact.Phone_Number.ToString();
-            editContactPopup.Country.Text = selectedContact.Country.ToString();
-            editContactPopup.Gender.Text = selectedContact.Gender.ToString();
-            editContactPopup.BirthDate.Text = selectedContact.Birth_Date.ToString();
-            editContactPopup.Language.Text = selectedContact.Language.ToString();
+                EditContactPopup editContactPopup = new EditContactPopup();
+
+                editContactPopup.Show();
+
+                editContactPopup.ID.Text = selectedContact.Id.ToString();
+                editContactPopup.Name.Text = selectedContact.Name.ToString();
+                editContactPopup.Email.Text = selectedContact.Email.ToString();
+                editContactPopup.PhoneNumber.Text = selectedContact.Phone_Number.ToString();
+                editContactPopup.Country.Text = selectedContact.Country.ToString();
+                editContactPopup.Gender.Text = selectedContact.Gender.ToString();
+                editContactPopup.BirthDate.Text = selectedContact.Birth_Date.ToString();
+                editContactPopup.Language.Text = selectedContact.Language.ToString();
+            }
         }
+
+
     }
 }
